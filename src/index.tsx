@@ -10,5 +10,8 @@ import { fetchData } from './middleware/sagas';
 import App from './components/App';
 import rootReducer from './reducers';
 
+const sagaMiddleware = createSagaMiddleware();
+let middleware = composeWithDevTools(applyMiddleware(sagaMiddleware, logger));
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// process.env.NODE_ENV !== 'production'
+//   ? (middleware = composeWithDevTools(applyMiddleware(sagaMiddleware, logger)))
