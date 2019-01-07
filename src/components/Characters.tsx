@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { fetchData } from '../actions/index';
+import DynamicImports from './DynamicImports';
 
-// interface ICharactersProps {
-//   characters: object[];
-// }
+const Characters = props => {
+  return (
+    <div className="character-page">
+      <h1 className="characters-title">Characters</h1>
 
-const Characters = () => {
-  return <h1>CHARACTERs</h1>;
+      <DynamicImports load={() => import('./PageView')}>
+        {Component => {
+          return !Component ? <h1>Loading...</h1> : <Component {...props} />;
+        }}
+      </DynamicImports>
+    </div>
+  );
 };
-
-export const mapStateToProps = (state: { characters: any[] }) => ({
-  characters: state.characters
-});
 
 export default Characters;
