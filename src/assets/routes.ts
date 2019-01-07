@@ -1,14 +1,18 @@
+import Characters from '../components/Characters';
+import Locations from '../components/Locations';
+import Episodes from '../components/Episodes';
+
 export default [
   {
     path: '/characters',
-    import_path: './Characters'
+    component: Characters
   },
   {
     path: '/locations',
-    import_path: './Locations'
+    component: Locations
   },
   {
     path: '/episodes',
-    import_path: './Episodes'
+    component: Episodes
   }
 ];
