@@ -5,26 +5,9 @@ import DynamicImports from './DynamicImports';
 
 const Routes = props => {
   const routeViews: object[] = routesList.map(route => {
-    const { path, import_path } = route;
+    const { path, component } = route;
 
-    return (
-      <Route
-        path={path}
-        render={match => {
-          return (
-            <DynamicImports load={() => import(`${import_path}`)} match={match}>
-              {Component => {
-                return !Component ? (
-                  <h1>Loading...</h1>
-                ) : (
-                  <Component {...props} />
-                );
-              }}
-            </DynamicImports>
-          );
-        }}
-      />
-    );
+    return <Route path={path} component={component} />;
   });
   return <Switch>{routeViews}</Switch>;
 };
