@@ -7,6 +7,14 @@ export const fetchData = (query: string) => {
   }
 };
 
+export const setNextPage = () => ({
+  type: 'NEXT_PAGE'
+});
+
+export const setPreviousPage = () => ({
+  type: 'PREV_PAGE'
+});
+
 const actionObj = (type: string) => ({
   type
 });
