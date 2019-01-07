@@ -1,18 +1,14 @@
 import * as React from 'react';
+import DynamicImports from './DynamicImports';
 
-interface ILocationsProps {
-  match: object;
-}
-
-interface ILocationsState {}
-
-class Locations extends React.Component<ILocationsProps, ILocationsState> {
-  state = {};
-
-  public render() {
-    console.log(this.props.match);
-    return <h1>IMADE IT TO locations</h1>;
-  }
-}
+const Locations = props => {
+  return (
+    <DynamicImports load={() => import('./PageView')}>
+      {Component => {
+        return !Component ? <h1>Loading...</h1> : <Component {...props} />;
+      }}
+    </DynamicImports>
+  );
+};
 
 export default Locations;
