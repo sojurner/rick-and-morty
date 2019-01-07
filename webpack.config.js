@@ -1,5 +1,7 @@
 const path = require('path'),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
+  HtmlWebpackPlugin = require('html-webpack-plugin'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+  development = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './src/index.tsx',
@@ -18,8 +20,18 @@ module.exports = {
         loader: 'awesome-typescript-loader',
         exclude: /node_modules/
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: './public/index.html' })]
+  plugins: [
+    new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new MiniCssExtractPlugin({
+      filename: development ? '[name].css' : '[name].[hash].css',
+      chunkFilename: development ? '[id].css' : '[id].[hash].css'
+    })
+  ]
 };
