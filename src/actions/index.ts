@@ -1,18 +1,11 @@
 export const fetchData = (query: string) => {
-  switch (query) {
-    case 'characters':
-      return actionObj(`FETCH_${query.toUpperCase()}`);
-    default:
-      return actionObj(`FETCH_CHARACTERS`);
-  }
+  return actionObj(`FETCH_INITIAL`);
 };
 
-export const setNextPage = () => ({
-  type: 'NEXT_PAGE'
-});
-
-export const setPreviousPage = () => ({
-  type: 'PREV_PAGE'
+export const addPage = (category: string, page: string) => ({
+  type: 'FETCH_PAGE',
+  category,
+  page
 });
 
 const actionObj = (type: string) => ({
