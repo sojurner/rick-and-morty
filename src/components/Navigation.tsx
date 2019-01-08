@@ -11,9 +11,9 @@ const Navigation = (props: INavigationProps) => {
   const { routes } = props;
   return (
     <nav>
-      {routes.map(link => {
+      {routes.map((link, index) => {
         return (
-          <NavLink exact to={`/${link}`} className="navlink">
+          <NavLink key={`link-${index}`} to={`/${link}/1`} className="navlink">
             {link}
             <img src="https://img.icons8.com/ios/50/000000/rick-sanchez.png" />
           </NavLink>
