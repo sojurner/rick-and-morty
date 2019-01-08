@@ -12,8 +12,7 @@ export const characters = data => {
   });
 
   return {
-    previous: data.info.prev || null,
-    next: data.info.next,
+    pageCount: data.info.pages,
     characters: characterDetails
   };
 };
@@ -30,8 +29,7 @@ export const episodes = data => {
     };
   });
   return {
-    previous: data.info.prev || null,
-    next: data.info.next || null,
+    pageCount: data.info.pages,
     episodes: episodeDetails
   };
 };
@@ -48,8 +46,7 @@ export const locations = data => {
     };
   });
   return {
-    previous: data.info.prev,
-    next: data.info.next,
+    pageCount: data.info.pages,
     locations: locationDetails
   };
 };
