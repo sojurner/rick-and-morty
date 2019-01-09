@@ -1,46 +1,52 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { addPage } from '../actions';
-import PageView from './PageView';
+import { addPage, changePage } from '../actions';
+import '../styles/PageHeader.css';
 
 interface ICharacterProps {
   category: string;
-  pageCount: object;
-  pageView: object;
+  state: { pageView: {} };
   history: any;
   match: { path: string };
   getPage: Function;
+  changePage: Function;
 }
 
 interface ICharacterState {
-  page: number;
+  loading: boolean;
 }
 class PageHeader extends React.Component<ICharacterProps, ICharacterState> {
   state = {
-    page: 1
+    loading: false
   };
 
   public getPage = async (category, page) => {
-    await this.props.getPage(category, page);
-    setTimeout(() => {
-      this.props.history.push(`/${category}/${page}`)
-  }, 400);
+    const { state, history, getPage, changePage } = this.props;
+    if (!state[category][page]) {
+      getPage(category, page);
+      this.setState({ loading: true });
+      setTimeout(() => {
+        this.setState({ loading: !this.state.loading });
+
+        history.push(`/${category}/${page}`);
+      }, 600);
+    } else {
+      changePage(category, page);
+      this.props.history.push(`/${category}/${page}`);
+    }
+  };
 
   public render() {
-    const { match, pageView, pageCount } = this.props;
-    const category = this.props.match.path.slice(1);
+    const { state, match } = this.props;
+    const { pageView } = state;
+    const category = match.path.slice(1);
 
     return (
       <div>
-        <h1>peope</h1>
+        <h1>{category}</h1>
 
         <button
-          onClick={this.getPage.bind(
-            null,
-            'characters',
-            pageView[category] - 1
-          )}
+          onClick={this.getPage.bind(null, category, pageView[category] - 1)}
         >
           {' '}
           prev{' '}
@@ -50,21 +56,26 @@ class PageHeader extends React.Component<ICharacterProps, ICharacterState> {
         >
           next
         </button>
+        {this.state.loading && (
+          <div className="loading-gif">
+            <img src="http://i.imgur.com/SaYmoW6.gif" />
+          </div>
+        )}
       </div>
     );
   }
 }
 
 export const mapStateToProps = state => ({
-  pageCount: state.pageCount,
-  pageView: state.pageView
+  state
 });
 
 export const mapDispatchToProps = dispatch => ({
+  changePage: (category, page) => dispatch(changePage(category, page)),
   getPage: (str, page) => dispatch(addPage(str, page))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Characters);
+)(PageHeader);
