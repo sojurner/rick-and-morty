@@ -1,7 +1,5 @@
-let initialState = {};
-
 export const locationReducer = (
-  state = initialState,
+  state = {},
   action: { type: string; payload: any; page: number }
 ) => {
   switch (action.type) {
