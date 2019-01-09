@@ -8,9 +8,10 @@ interface IPageViewProps {
   history: object;
   location: object;
   match: object;
-  matchingPage: object;
+  matchingPage: any[];
   getPage: Function;
   pageCount: number;
+  category: string | null;
 }
 
 interface IPageViewState {
@@ -19,11 +20,11 @@ interface IPageViewState {
 
 class PageView extends React.Component<IPageViewProps, IPageViewState> {
   render() {
-    const { matchingPage, category, pageView, pageCount } = this.props;
+    const { matchingPage, category } = this.props;
     return (
       <section>
         {matchingPage.map(item => {
-          return <ContentCard item={item} type={category} />;
+          return <ContentCard item={item} category={category} />;
         })}
         <div />
       </section>
@@ -31,7 +32,4 @@ class PageView extends React.Component<IPageViewProps, IPageViewState> {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageView);
+export default PageView;
