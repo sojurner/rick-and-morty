@@ -39,7 +39,7 @@ export function* fetchPage({ category, page }) {
       yield put({ type: 'ADD_EPISODE_SET', payload: data.episodes, page });
       yield put({ type: 'EPISODE_PAGE', page });
       break;
-    case 'location':
+    case 'locations':
       yield put({ type: 'ADD_LOCATION_SET', payload: data.locations, page });
       yield put({ type: 'LOCATION_PAGE', page });
       break;
