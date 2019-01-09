@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import Characters from './Characters';
-import Locations from './Locations';
-import Episodes from './Episodes';
+import PageHeader from './PageHeader';
 
 import DynamicImports from './DynamicImports';
 
@@ -11,24 +9,23 @@ const Routes = props => {
   const routesList: any[] = [
     {
       paths: '/characters/:id',
-      key: 'characters',
-      main: Characters
+      key: 'characters'
     },
     {
       paths: '/locations/:id',
-      key: 'locations',
-      main: Locations
+      key: 'locations'
     },
     {
       paths: '/episodes/:id',
-      key: 'episodes',
-      main: Episodes
+      key: 'episodes'
     }
   ];
 
   const mainRoutes = routesList.map((routes, index) => {
     const { key, main } = routes;
-    return <Route path={`/${key}`} component={main} />;
+    return (
+      <Route key={`header-${index}`} path={`/${key}`} component={PageHeader} />
+    );
   });
 
   const routeViews: object[] = routesList.map((routes, index) => {
@@ -54,7 +51,6 @@ const Routes = props => {
         }}
       />
     );
-    console.log(route);
     return route;
   });
   return (
