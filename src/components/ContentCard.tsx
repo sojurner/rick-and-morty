@@ -9,13 +9,13 @@ interface IContentCardProps {
     origin: { name: string; url: string };
     species: string;
   };
-  type: string;
+  category: string;
 }
 
 const ContentCard = (props: IContentCardProps) => {
-  const { item, type } = props;
+  const { item, category } = props;
 
-  switch (type) {
+  switch (category) {
     case 'characters':
       return (
         <div>
@@ -24,6 +24,8 @@ const ContentCard = (props: IContentCardProps) => {
         </div>
       );
     case 'locations':
+      return <h1>{item.name}</h1>;
+    case 'episodes':
       return <h1>{item.name}</h1>;
   }
 };
