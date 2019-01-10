@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface iDynamicImportsProps {
   load: Function;
-  children?: any;
+  children: any;
 }
 
 interface iDynamicImportsState {
