@@ -19,8 +19,10 @@ export const changePage = (
       return { type: 'EPISODE_PAGE', page };
     case 'location':
       return { type: 'LOCATION_PAGE', page };
+    case 'reset':
+      return { type: 'RESET_ALL_PAGES', page };
     default:
-      return { type: 'CHARACTER_PAGE', page };
+      return { type: 'RESET_ALL_PAGES', page };
   }
 };
 
