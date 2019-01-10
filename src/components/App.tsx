@@ -18,12 +18,13 @@ class App extends React.Component<IAppProps, {}> {
   };
 
   public render() {
-    const routes: string[] = ['characters', 'locations', 'episodes'];
-
     return (
       <Router>
         <div>
-          <Navigation routes={routes} />
+          <header className="title">
+            Rick <span className="title-and">and</span> Morty
+          </header>
+          <Navigation />
           <Routes />
         </div>
       </Router>
