@@ -7,9 +7,13 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].bundle.js'
+    filename: 'js/[name].bundle.js',
+    publicPath: '/'
   },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
   },
@@ -24,13 +28,23 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       },
+      {
+        test: /\.(ttf|mp3)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[name].[hash].[ext]',
+            outputPath: 'static/media/'
+          }
+        }
+      },
       { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new MiniCssExtractPlugin({
-      filename: development ? '[name].css' : '[name].[hash].css',
+      filename: development ? '[name].css' : 'bundle.[name].[contenthash].css',
       chunkFilename: development ? '[id].css' : '[id].[hash].css'
     })
   ]
