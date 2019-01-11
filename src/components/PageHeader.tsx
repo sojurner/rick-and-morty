@@ -1,39 +1,31 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import Loading from './Loading';
 import { addPage, changePage } from '../actions';
 import '../styles/PageHeader.css';
 
 interface ICharacterProps {
   category: string;
-  state: { pageView: {} };
+  state: { pageView: {}; pageCount: {} };
   history: any;
   match: { path: string };
   getPage: Function;
   changePage: Function;
 }
 
-interface ICharacterState {
-  loading: boolean;
-}
-class PageHeader extends React.Component<ICharacterProps, ICharacterState> {
-  state = {
-    loading: false
+class PageHeader extends React.Component<ICharacterProps, {}> {
+  componentDidMount = () => {
+    this.props.changePage('reset', 1);
   };
 
   public getPage = async (category, page) => {
     const { state, history, getPage, changePage } = this.props;
     if (!state[category][page]) {
-      getPage(category, page);
-      this.setState({ loading: true });
-      setTimeout(() => {
-        this.setState({ loading: !this.state.loading });
-
-        history.push(`/${category}/${page}`);
-      }, 600);
+      await getPage(category, page);
     } else {
       changePage(category, page);
-      this.props.history.push(`/${category}/${page}`);
     }
+    history.push(`/${category}/${page}`);
   };
 
   public render() {
