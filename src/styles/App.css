@@ -1,4 +1,40 @@
-.title {
+@font-face {
+  font-family: rick-main;
+  src: url(../assets/fonts/rick_morty_main.ttf);
+}
+
+@font-face {
+  font-family: rick-header;
+  src: url(../assets/fonts/rick_morty_header.ttf);
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  font-family: rick-header;
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 4rem;
+  color: #dda965;
+  text-shadow: 1px 1px 6px rgba(89, 206, 78, 0.582),
+    1px 4px 4px rgba(209, 255, 6, 0.712);
+  filter: invert(0.95);
+}
+
+.title-and {
   font-size: 2rem;
-  color: red;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background: url(http://wallpapershdnow.com/images/tv-shows/animation/rick-and-morty/rick-and-morty-background-14.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-color: rgba(63, 59, 59, 0.473);
 }
