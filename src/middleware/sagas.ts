@@ -3,6 +3,11 @@ import { put } from 'redux-saga/effects';
 import * as call from '../utils/apiCalls';
 
 function* retrieveInitialData() {
+  yield put({
+    type: 'IS_LOADING',
+    payload: true
+  });
+
   const data = yield call.fetchData('characters');
   yield put({
     type: 'ADD_INITIAL_CHARACTERS',
@@ -26,9 +31,19 @@ function* retrieveInitialData() {
     payload: locations.locations,
     page: 1
   });
+
+  yield put({
+    type: 'HAS_LOADED',
+    payload: false
+  });
 }
 
-export function* fetchPage({ category, page }) {
+export function* fetchPage(props) {
+  yield put({
+    type: 'IS_LOADING',
+    payload: true
+  });
+  const { category, page } = props;
   const data = yield call.fetchNextPage(category, page);
   switch (category) {
     case 'characters':
@@ -46,6 +61,10 @@ export function* fetchPage({ category, page }) {
     default:
       return;
   }
+  yield put({
+    type: 'HAS_LOADED',
+    payload: false
+  });
 }
 
 export function* fetchData() {
