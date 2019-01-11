@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+
+import Loading from './Loading';
 import PageHeader from './PageHeader';
 
 import DynamicImports from './DynamicImports';
@@ -29,7 +31,7 @@ const Routes = props => {
   });
 
   const routeViews: object[] = routesList.map((routes, index) => {
-    const { paths, children, key } = routes;
+    const { paths, key } = routes;
     const route = (
       <Route
         key={`route-${index}`}
@@ -40,11 +42,15 @@ const Routes = props => {
           return (
             <DynamicImports load={() => import('./PageView')}>
               {Component => {
-                return !Component ? (
-                  <h1>Loading...</h1>
-                ) : (
-                  <Component category={key} matchingPage={matchingPage} />
-                );
+                if (!props.state.loading) {
+                  return !Component ? (
+                    <Loading />
+                  ) : (
+                    <Component category={key} matchingPage={matchingPage} />
+                  );
+                } else {
+                  return <Loading />;
+                }
               }}
             </DynamicImports>
           );
