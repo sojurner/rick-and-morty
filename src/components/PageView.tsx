@@ -1,7 +1,4 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import ContentCard from './ContentCard';
 
 interface IPageViewProps {
   dispatch: Function;
@@ -11,7 +8,7 @@ interface IPageViewProps {
   matchingPage: any[];
   getPage: Function;
   pageCount: number;
-  category: string | null;
+  category: string;
 }
 
 interface IPageViewState {
@@ -24,7 +21,19 @@ class PageView extends React.Component<IPageViewProps, IPageViewState> {
     return (
       <section>
         {matchingPage.map(item => {
-          return <ContentCard item={item} category={category} />;
+          switch (category) {
+            case 'characters':
+              return (
+                <div>
+                  <h1>{item.name}</h1>
+                  <img src={item.image} alt="Character image" />
+                </div>
+              );
+            case 'locations':
+              return <h1>{item.name}</h1>;
+            case 'episodes':
+              return <h1>{item.name}</h1>;
+          }
         })}
         <div />
       </section>
