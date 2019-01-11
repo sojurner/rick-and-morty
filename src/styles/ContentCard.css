@@ -1,0 +1,38 @@
+.content-card {
+  margin: 2rem 1rem;
+  border-radius: 0.5rem;
+  min-height: 20rem;
+  min-width: 15rem;
+  background-size: cover;
+  background-blend-mode: multiply;
+  transition: 0.1s linear;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.content-card:hover {
+  background-color: rgba(0, 0, 0, 0.637);
+}
+.content-img {
+  opacity: 0.5;
+  background-blend-mode: multiply;
+}
+
+.content-card h1 {
+}
+
+.content-name-hide,
+.content-name-show {
+  font-family: rick-main;
+  font-size: 2rem;
+  letter-spacing: 1.5px;
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  transform: translate3d(-10rem, 0, 0);
+  transition: 0.3s linear;
+  color: azure;
+}
+.content-name-show {
+  transform: translate3d(10%, 0, 0);
+}
