@@ -30,29 +30,45 @@ class PageHeader extends React.Component<ICharacterProps, {}> {
 
   public render() {
     const { state, match } = this.props;
-    const { pageView } = state;
+    const { pageView, pageCount } = state;
     const category = match.path.slice(1);
 
     return (
       <div>
-        <h1>{category}</h1>
-
-        <button
-          onClick={this.getPage.bind(null, category, pageView[category] - 1)}
-        >
-          {' '}
-          prev{' '}
-        </button>
-        <button
-          onClick={this.getPage.bind(null, category, pageView[category] + 1)}
-        >
-          next
-        </button>
-        {this.state.loading && (
-          <div className="loading-gif">
-            <img src="http://i.imgur.com/SaYmoW6.gif" />
+        <h1 className="category-title">{category}</h1>
+        <nav className="page-navigation">
+          <i
+            onClick={this.getPage.bind(null, category, pageView[category] - 1)}
+            className="material-icons left-arrow"
+          >
+            keyboard_arrow_left
+          </i>
+          <div className="page-number-links">
+            {Array.from({ length: pageCount[category] }, (v, k) => k + 1).map(
+              num => {
+                return (
+                  <span
+                    onClick={this.getPage.bind(null, category, num)}
+                    key={`page-${num}`}
+                    className={
+                      pageView[category] === num
+                        ? 'page-number-active'
+                        : 'page-number'
+                    }
+                  >
+                    {num}
+                  </span>
+                );
+              }
+            )}
           </div>
-        )}
+          <i
+            onClick={this.getPage.bind(null, category, pageView[category] + 1)}
+            className="material-icons right-arrow"
+          >
+            keyboard_arrow_right
+          </i>
+        </nav>
       </div>
     );
   }
