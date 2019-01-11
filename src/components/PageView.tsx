@@ -1,4 +1,6 @@
 import * as React from 'react';
+import '../styles/PageView.css';
+import ContentCard from './ContentCard';
 
 interface IPageViewProps {
   dispatch: Function;
@@ -19,20 +21,15 @@ class PageView extends React.Component<IPageViewProps, IPageViewState> {
   render() {
     const { matchingPage, category } = this.props;
     return (
-      <section>
+      <section className="content-container">
         {matchingPage.map(item => {
+          const { name } = item;
           switch (category) {
             case 'characters':
-              return (
-                <div>
-                  <h1>{item.name}</h1>
-                  <img src={item.image} alt="Character image" />
-                </div>
-              );
-            case 'locations':
-              return <h1>{item.name}</h1>;
-            case 'episodes':
-              return <h1>{item.name}</h1>;
+              const { image } = item;
+              return <ContentCard item={{ name, image }} />;
+            default:
+              return <ContentCard item={{ name }} />;
           }
         })}
         <div />
