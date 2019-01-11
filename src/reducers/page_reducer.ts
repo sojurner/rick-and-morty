@@ -27,6 +27,13 @@ export const pageReducer = (
       state.locations = action.page;
       return state;
 
+    case 'RESET_ALL_PAGES':
+      return {
+        characters: 1,
+        episodes: 1,
+        locations: 1
+      };
+
     default:
       return state;
   }
