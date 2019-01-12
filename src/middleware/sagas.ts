@@ -1,8 +1,7 @@
-import { takeLatest } from 'redux-saga';
 import { put } from 'redux-saga/effects';
 import * as call from '../utils/apiCalls';
 
-function* retrieveInitialData() {
+export function* retrieveInitialData() {
   yield put({
     type: 'IS_LOADING',
     payload: true
@@ -65,9 +64,4 @@ export function* fetchPage(props) {
     type: 'HAS_LOADED',
     payload: false
   });
-}
-
-export function* fetchData() {
-  yield takeLatest('FETCH_INITIAL', retrieveInitialData);
-  yield takeLatest('FETCH_PAGE', fetchPage);
 }
