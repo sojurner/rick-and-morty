@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import { fetchData } from './middleware/sagas';
+import { fetchData } from './middleware';
 import App from './components/App';
 import rootReducer from './reducers';
 
