@@ -1,12 +1,13 @@
 import * as React from 'react';
 import '../styles/PageView.css';
 import ContentCard from './ContentCard';
+import PageNavigation from './PageNavigation';
 
 interface IPageViewProps {
   dispatch: Function;
   history: object;
   location: object;
-  match: object;
+  match: { path: string };
   matchingPage: any[];
   getPage: Function;
   pageCount: number;
@@ -14,14 +15,30 @@ interface IPageViewProps {
 }
 
 interface IPageViewState {
-  page: number;
+  opaque: boolean;
 }
 
 class PageView extends React.Component<IPageViewProps, IPageViewState> {
+  state = {
+    opaque: true
+  };
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({ opaque: false });
+    }, 200);
+  };
+
   render() {
-    const { matchingPage, category } = this.props;
+    const { matchingPage, category, match, history } = this.props;
     return (
-      <section className="content-container">
+      <section
+        className={
+          this.state.opaque
+            ? 'content-container-hide'
+            : 'content-container-show'
+        }
+      >
         {matchingPage.map(item => {
           const { name } = item;
           switch (category) {
@@ -33,6 +50,10 @@ class PageView extends React.Component<IPageViewProps, IPageViewState> {
           }
         })}
         <div />
+        <PageNavigation
+          match={match.path.slice(1, match.path.lastIndexOf('/'))}
+          history={history}
+        />
       </section>
     );
   }
