@@ -1,0 +1,43 @@
+.material-icons {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  margin: 0 2rem;
+}
+
+.page-navigation {
+  filter: invert(0.95);
+  text-shadow: 1.5px 1.5px 1.5px rgb(69, 192, 182);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: rick-main;
+}
+
+.page-number-links {
+  height: max-content;
+  align-self: center;
+}
+
+.page-number,
+.page-number-active {
+  color: rgb(205, 205, 252);
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  transition: 0.2s linear;
+  padding-top: 0.4rem;
+  width: 2rem;
+}
+
+.page-number:hover {
+  color: aliceblue;
+  border-top: 2px solid rgb(184, 236, 245);
+  width: 1.3rem;
+}
+
+.page-number-active {
+  color: rgb(98, 182, 255);
+}

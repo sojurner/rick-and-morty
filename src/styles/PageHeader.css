@@ -18,47 +18,11 @@
 /* page-header-title */
 
 .category-title {
-  color: aqua;
+  text-transform: capitalize;
+  color: rgb(187, 129, 122);
+  font-size: 3rem;
+  text-align: left;
+  margin-left: 2rem;
 }
 
 /* page navigation */
-
-.material-icons {
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-  cursor: pointer;
-  margin: 0 2rem;
-}
-
-.page-navigation {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  font-family: rick-main;
-}
-
-.page-number-links {
-  align-self: flex-end;
-}
-
-.page-number,
-.page-number-active {
-  color: rgb(159, 159, 233);
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin: 0 0.5rem;
-  transition: 0.2s linear;
-  padding-top: 0.4rem;
-  width: 2rem;
-}
-
-.page-number:hover {
-  color: aliceblue;
-  border-top: 2px solid rgb(184, 236, 245);
-  width: 1.3rem;
-}
-
-.page-number-active {
-  color: rgb(98, 182, 255);
-}

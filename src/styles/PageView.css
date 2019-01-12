@@ -1,5 +1,12 @@
-.content-container {
+.content-container-show,
+.content-container-hide {
+  opacity: 0;
+}
+
+.content-container-show {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
+  transition: 1s ease-in-out;
+  opacity: 1;
 }
