@@ -36,7 +36,7 @@ const Routes = props => {
       <Route
         key={`route-${index}`}
         path={paths}
-        render={({ match }) => {
+        render={({ match, history }) => {
           const id = match.params.id;
           const matchingPage = props.state[key][id];
           return (
@@ -46,7 +46,12 @@ const Routes = props => {
                   return !Component ? (
                     <Loading />
                   ) : (
-                    <Component category={key} matchingPage={matchingPage} />
+                    <Component
+                      match={match}
+                      history={history}
+                      category={key}
+                      matchingPage={matchingPage}
+                    />
                   );
                 } else {
                   return <Loading />;
